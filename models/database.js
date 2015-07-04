@@ -1,7 +1,7 @@
 var pg = require('pg');
-var connectionString = process.env.DATABASE_URL || 'postgres://localhost:5432/todo';
+var connectionString = process.env.DATABASE_URL || 'postgres://postgres:123456@localhost:5432/supermercado';
 
 var client = new pg.Client(connectionString);
 client.connect();
-var query = client.query('CREATE TABLE items(id SERIAL PRIMARY KEY, text VARCHAR(40) not null, complete BOOLEAN)');
+var query = client.query('CREATE TABLE produtos(id SERIAL PRIMARY KEY, nome VARCHAR(40) not null, preco real not null, descricao VARCHAR(800) not null, imagem VARCHAR(200) not null)');
 query.on('end', function() { client.end(); });
