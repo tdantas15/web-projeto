@@ -14,11 +14,17 @@
 				<input id="search_submit" type="submit" />
 			</form>
 			<a id="cart_href" href="/cart/{{uid}}/"></a>
-			<div ID="facebook_login">### FACEBOOK LOGIN AQUI!! ###</div>
+			<div ID="google_login">
+				{{#if user}}
+  			<h1>{{user.nome}} Está Logado <a href="/logout"> Logout</a></h1>
+				{{else}}
+					<a href="/auth/google"> Login com Google </a>
+  			{{/if}}
+			</div>
 		</nav>
 
 	    {{{body}}}
-	    
+
 		<footer>
 			<ul id="socialMedias" class="print-hide">
 				<li><a href="https://www.facebook.com" id="facebookLink" class="socialMediaLink fa fa-facebook">Facebook</a></li>
