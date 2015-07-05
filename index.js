@@ -3,22 +3,35 @@ var app = express();
 var pg = require('pg');
 var hbs = require('express-hbs');
 var fs = require('fs');
+var bodyParser = require('body-parser')
 var connectionString = process.env.DATABASE_URL || 'postgres://postgres:123456@localhost:5432/supermercado';
 
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
+app.use("/style", express.static(__dirname + '/views/style'));
+app.use("/fonts", express.static(__dirname + '/views/fonts'));
 app.engine('hbs', hbs.express4({
   partialsDir: __dirname + '/views/partials', defaultLayout: __dirname +"/views/layouts/main.hbs"
 }));
 app.set('view engine', 'hbs');
 
-app.use("/style", express.static(__dirname + '/views/style'));
-app.use("/fonts", express.static(__dirname + '/views/fonts'));
+
+var server = app.listen(3000, function () {
+
+  var host = server.address().address;
+  var port = server.address().port;
+
+  console.log('Example app listening at http://%s:%s', host, port);
+
+});
 
 app.get('/', function(req, res){
   res.redirect('/produtos')
 });
 
 app.get('/produtos', function(req, res){
-  console.log("GET /produtos");
+
   pg.connect(connectionString, function(err, client, done) {
 
       var results = [];
@@ -40,21 +53,19 @@ app.get('/produtos', function(req, res){
   });
 });
 
+app.get('/produtos/new', function(req, res){
+  res.render('novo_produto');
+});
+
 app.post('/produtos', function(req, res){
-  console.log("POST /produtos");
+  var results = [];
+  var data = req.body;
+
   pg.connect(connectionString, function(err, client, done) {
-
-      var results = [];
-      var data = {text: req.body.text, complete: false};
-      client.query("INSERT INTO produtos(nome, preco, descricao, imagem) values($1, $2, $3, $4)", [data.nome, data.preco, data.descricao, data.imagem]);
-
-      query.on('row', function(row) {
-          results.push(row);
-      });
-
+      query = client.query("INSERT INTO produtos(nome, preco, descricao, imagem) values($1, $2, $3, $4)", [data.nome, data.preco, data.descricao, data.imagem]);
       query.on('end', function() {
           client.end();
-          return res.json(results);
+          res.redirect('/produtos');
       });
 
       if(err) {
@@ -62,14 +73,4 @@ app.post('/produtos', function(req, res){
       }
 
   });
-});
-
-
-var server = app.listen(3000, function () {
-
-  var host = server.address().address;
-  var port = server.address().port;
-
-  console.log('Example app listening at http://%s:%s', host, port);
-
 });

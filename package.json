@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/tdantas15/supermercado-web#readme",
   "dependencies": {
+    "body-parser": "^1.13.1",
     "cool-ascii-faces": "~1.3.x",
     "ejs": "^2.3.1",
     "express": "^4.13.0",
