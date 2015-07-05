@@ -10,8 +10,11 @@ app.engine('hbs', hbs.express4({
 }));
 app.set('view engine', 'hbs');
 
+app.use("/style", express.static(__dirname + '/views/style'));
+app.use("/fonts", express.static(__dirname + '/views/fonts'));
+
 app.get('/', function(req, res){
-  res.render('index');
+  res.redirect('/produtos')
 });
 
 app.get('/produtos', function(req, res){
@@ -27,7 +30,7 @@ app.get('/produtos', function(req, res){
 
       query.on('end', function() {
           client.end();
-          return res.json(results);
+          res.render('index', {produtos: results});
       });
 
       if(err) {
