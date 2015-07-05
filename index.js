@@ -75,18 +75,19 @@ app.post('/produtos', function(req, res){
       }
 
   });
-  
-  app.post('/search', function(req, res){
+});
+
+app.post('/search', function(req, res){
   var results = [];
   var data = req.body;
 
   pg.connect(connectionString, function(err, client, done) {
       query = client.query("SELECT * FROM produtos WHERE produtos.nome LIKE '%$1%'", [data.nome]);
-      
+
       query.on('row', function(row) {
           results.push(row);
       });
-      
+
       query.on('end', function() {
           client.end();
           res.render('index', {produtos: results});
@@ -97,8 +98,10 @@ app.post('/produtos', function(req, res){
       }
 
   });
-  
-  app.get('/cart/:uid', function(req, res){ //Verificar isso aqui... É um chutão :p
+});
+
+
+app.get('/cart/:uid', function(req, res){ //Verificar isso aqui... É um chutão :p
 
   pg.connect(connectionString, function(err, client, done) {
 
@@ -122,11 +125,12 @@ app.post('/produtos', function(req, res){
 });
 
 app.get('/produto/:id', function(req, res){
+  var data = req.body;
 
   pg.connect(connectionString, function(err, client, done) {
 
       var results = [];
-      var query = client.query("SELECT * FROM produtos WHERE produtos.id=$1",request.params.id);
+      var query = client.query("SELECT * FROM produtos WHERE produtos.id=$1",[data.id]);
 
       query.on('row', function(row) {
           results.push(row);
@@ -142,6 +146,4 @@ app.get('/produto/:id', function(req, res){
       }
 
   });
-});
-  
 });
