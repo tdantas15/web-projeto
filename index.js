@@ -14,7 +14,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use("/style", express.static(__dirname + '/views/style'));
 app.use("/fonts", express.static(__dirname + '/views/fonts'));
 app.engine('hbs', hbs.express4({
-  partialsDir: __dirname +'/views/partials', defaultLayout: __dirname +"/views/layouts/main.hbs"
+  defaultLayout: __dirname +"/views/layouts/main.hbs"
 }));
 app.set('view engine', 'hbs');
 
