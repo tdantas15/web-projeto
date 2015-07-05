@@ -5,6 +5,8 @@ var hbs = require('express-hbs');
 var fs = require('fs');
 var bodyParser = require('body-parser')
 var connectionString = process.env.DATABASE_URL || 'postgres://postgres:123456@localhost:5432/supermercado';
+app.set('port', (process.env.PORT || 3000));
+
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -17,12 +19,12 @@ app.engine('hbs', hbs.express4({
 app.set('view engine', 'hbs');
 
 
-var server = app.listen(3000, function () {
+var server = app.listen(app.get('port'), function () {
 
   var host = server.address().address;
   var port = server.address().port;
 
-  console.log('Example app listening at http://%s:%s', host, port);
+  console.log('Supermercado app listening at http://%s:%s', host, port);
 
 });
 
