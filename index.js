@@ -11,10 +11,10 @@ app.set('port', (process.env.PORT || 3000));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.use("/style", express.static('./views/style'));
-app.use("/fonts", express.static('./views/fonts'));
+app.use("/style", express.static(__dirname + '/views/style'));
+app.use("/fonts", express.static(__dirname + '/views/fonts'));
 app.engine('hbs', hbs.express4({
-  partialsDir: './views/partials', defaultLayout: "./views/layouts/main.hbs"
+  partialsDir: __dirname +'/views/partials', defaultLayout: __dirname +"/views/layouts/main.hbs"
 }));
 app.set('view engine', 'hbs');
 
