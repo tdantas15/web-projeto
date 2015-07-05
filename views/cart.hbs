@@ -1,0 +1,24 @@
+<h2>Seu Carrinho</h2>
+<article>
+	<ul class="compact_product_list">
+	{{#each produtos}}
+		<li class="product_entry">
+			<a href="/produto/{{id}}/"><img src="{{imagem}}" class="compact_image" alt="{{nome}} product image" /></a>
+			<span class="compact_name"><a href="/produto/{{id}}/">{{nome}}</a></span>
+			<span class="compact_price">R&#36;{{preco}}</span>
+			<span class="compact_quantity">{{quantidade}}</span>
+			<form action="" method="post">
+				<input type="number" name="quantidade" min="0" />
+				<input type="submit" value="Alterar" />
+			</form>
+			<button type="button">Remover</button>
+			<br />-------------------------------------------------<br />
+		</li>
+	{{/each}}
+	</ul>
+	<span class="cart_total">Total ({{qtd_items}}): R&#36;{{preco_total}}</span>
+</article>
+<article id="cart_lateral_total">
+	<span class="cart_total">Total ({{qtd_items}}): R&#36;{{preco_total}}</span>
+	<button type="button">Comprar!</button> 
+</article>

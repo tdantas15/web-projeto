@@ -1,31 +1,33 @@
 <!doctype html>
 <html>
-<head>
-  <meta charset="UTF-8">
-  <title> Zézinho's Shop </title>
-  <link rel="stylesheet" type="text/css" href="/style/bootstrap-theme.min.css">
-  <link rel="stylesheet" type="text/css" href="/style/bootstrap.css">
-  <link rel="stylesheet" type="text/css" href="/style/style.css">
-</head>
-<body>
-
-  <nav class="navbar navbar-inverse navbar-static-top">
-			<div class="container-fluid">
-	    		<div class="navbar-header">
-	      			<a class="navbar-brand" href="/">
-	        			Zézinho's Shop
-	      			</a>
-	    		</div>
-	    		<ul class="nav navbar-nav navbar-left">
-        			<li><a href="/">Inicial</a></li>
-    			</ul>
-          <ul class="nav navbar-nav navbar-right">
-              <li><a href="#"><span class="glyphicon glyphicon-shopping-cart glyphicon-inverse" aria-hidden="true"></a></span></li>
-          </ul>
-	  		</div>
+	<head>
+		<meta charset="UTF-8">
+		<title> Cold Shot : Artigos de Sobrevivência na Neve </title>
+		<link rel="stylesheet" type="text/css" href="/style/style.css">
+	</head>
+	<body>
+		<nav>
+			<a href="/"><img id="img_logo" src="imgs/logo.png" alt="website logo" /></a>
+			<a href="/">Inicial</a>
+			<form action="/search" method="post">
+				<input type="text" name="nome" />
+				<input id="search_submit" type="submit" />
+			</form>
+			<a id="cart_href" href="/cart/{{uid}}/"></a>
+			<div ID="facebook_login">### FACEBOOK LOGIN AQUI!! ###</div>
 		</nav>
 
-    {{{body}}}
-
-</body>
+	    {{{body}}}
+	    
+		<footer>
+			<ul id="socialMedias" class="print-hide">
+				<li><a href="https://www.facebook.com" id="facebookLink" class="socialMediaLink fa fa-facebook">Facebook</a></li>
+				<li><a href="https://twitter.com/" id="twitterLink" class="socialMediaLink fa fa-twitter">Twitter</a></li>
+				<li><a href="https://plus.google.com" id="googlePlusLink" class="socialMediaLink fa fa-google-plus">Google+</a></li>
+                        </ul>
+                        <div id="cartoes">
+				<span id="visa"></span><span id="masterCard"></span><span id="americanExpress"></span>
+			</div>
+		</footer>
+	</body>
 </html>

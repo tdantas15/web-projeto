@@ -75,4 +75,73 @@ app.post('/produtos', function(req, res){
       }
 
   });
+  
+  app.post('/search', function(req, res){
+  var results = [];
+  var data = req.body;
+
+  pg.connect(connectionString, function(err, client, done) {
+      query = client.query("SELECT * FROM produtos WHERE produtos.nome LIKE '%$1%'", [data.nome]);
+      
+      query.on('row', function(row) {
+          results.push(row);
+      });
+      
+      query.on('end', function() {
+          client.end();
+          res.render('index', {produtos: results});
+      });
+
+      if(err) {
+        console.log(err);
+      }
+
+  });
+  
+  app.get('/cart/:uid', function(req, res){ //Verificar isso aqui... É um chutão :p
+
+  pg.connect(connectionString, function(err, client, done) {
+
+      var results = [];
+      var query = client.query("SELECT * FROM carrinho WHERE carrinho.uid=$1",request.params.uid);
+
+      query.on('row', function(row) {
+          results.push(row);
+      });
+
+      query.on('end', function() {
+          client.end();
+          res.render('cart', {produtos: results});
+      });
+
+      if(err) {
+        console.log(err);
+      }
+
+  });
+});
+
+app.get('/produto/:id', function(req, res){
+
+  pg.connect(connectionString, function(err, client, done) {
+
+      var results = [];
+      var query = client.query("SELECT * FROM produtos WHERE produtos.id=$1",request.params.id);
+
+      query.on('row', function(row) {
+          results.push(row);
+      });
+
+      query.on('end', function() {
+          client.end();
+          res.render('produto', {produtos: results});
+      });
+
+      if(err) {
+        console.log(err);
+      }
+
+  });
+});
+  
 });
