@@ -31,6 +31,7 @@ app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use("/style", express.static(__dirname + '/views/style'));
+app.use("/img", express.static(__dirname + '/views/imgs'));
 app.use("/fonts", express.static(__dirname + '/views/fonts'));
 app.engine('hbs', hbs.express4({
   defaultLayout: __dirname +"/views/layouts/main.hbs"
@@ -191,12 +192,13 @@ app.post('/search', function(req, res){
 });
 
 
-app.get('/cart/:uid', function(req, res){ //Verificar isso aqui... É um chutão :p
+app.get('/cart', function(req, res){
 
+  var data = req.body;
   pg.connect(connectionString, function(err, client, done) {
 
       var results = [];
-      var query = client.query("SELECT * FROM carrinho WHERE carrinho.uid=$1",request.params.uid);
+      var query = client.query("SELECT * FROM carrinhos WHERE users.id=$1",request.params.uid);
 
       query.on('row', function(row) {
           results.push(row);
