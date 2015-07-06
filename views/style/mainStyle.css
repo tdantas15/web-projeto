@@ -8,7 +8,7 @@ body{
 	margin:0px;
 	text-align:center;
 	min-width:1286px;
-	background-image: url('../imgs/snowflakePattern.png');
+	background-image: url('/img/snowflakePattern.png');
 }
 
 /*Barra superior de navegação*/
@@ -31,7 +31,7 @@ nav div a{
 	color: black;
 	text-decoration: none;
 	padding:3px;
-} 
+}
 
 /*Logomarca*/
 #img_logo{
@@ -51,7 +51,7 @@ nav div a{
 	margin:0;
 	border: none;
 	background: none;
-	background-image: url('../imgs/sprites.png');
+	background-image: url('/img/sprites.png');
 	background-repeat: no-repeat;
 	background-position:-150px 0;
 }
@@ -71,7 +71,7 @@ nav div a{
 	margin:0;
 	border: none;
 	background: none;
-	background-image: url('../imgs/sprites.png');
+	background-image: url('/img/sprites.png');
 	background-repeat: no-repeat;
 	background-position:-50px 0;
 }
@@ -122,7 +122,7 @@ nav div a{
 	width:100px;
 	padding-right:15px;
 	margin:0;
-	background-image: url('../imgs/sprites.png');
+	background-image: url('/img/sprites.png');
 	background-repeat: no-repeat;
 }
 #visa{

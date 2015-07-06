@@ -31,6 +31,7 @@ app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use("/style", express.static(__dirname + '/views/style'));
+app.use("/img", express.static(__dirname + '/views/imgs'));
 app.use("/fonts", express.static(__dirname + '/views/fonts'));
 app.engine('hbs', hbs.express4({
   defaultLayout: __dirname +"/views/layouts/main.hbs"
@@ -44,6 +45,7 @@ passport.use(new GoogleStrategy({
     clientID:     "1046465514072-fcviu9lgrrba8kijtg45bffv0hpuur0g.apps.googleusercontent.com",
     clientSecret: "Db8alN06xD6lJfIftlaLdwf1",
     callbackURL: "http://young-cove-1583.herokuapp.com/auth/google/callback",
+    //callbackURL: "http://www.eskimo.com.br:3000/auth/google/callback",
     passReqToCallback   : true
   },
   function(request, accessToken, refreshToken, profile, done) {
@@ -76,7 +78,7 @@ var findOrCreateUser = function(name, googleId, callback){
 
       query.on('end', function() {
           if (results.length == 0) {
-            var queryInsert = client.query("INSERTO INTO usuarios (google_id, nome) values ($1, $2)", data);
+            var queryInsert = client.query("INSERT INTO usuarios (google_id, nome) values ($1, $2)", data);
 
             queryInsert.on('end', function() {
                 client.end();
@@ -172,7 +174,7 @@ app.post('/search', function(req, res){
   var data = req.body;
 
   pg.connect(connectionString, function(err, client, done) {
-      query = client.query("SELECT * FROM produtos WHERE produtos.nome LIKE '%$1%'", [data.nome]);
+      query = client.query("SELECT * FROM produtos WHERE UPPER(produtos.nome) LIKE " + "UPPER('%"+data.nome+"%')");
 
       query.on('row', function(row) {
           results.push(row);
@@ -180,6 +182,7 @@ app.post('/search', function(req, res){
 
       query.on('end', function() {
           client.end();
+          console.log(results);
           res.render('index', {produtos: results, user: req.user});
       });
 
@@ -191,12 +194,35 @@ app.post('/search', function(req, res){
 });
 
 
-app.get('/cart/:uid', function(req, res){ //Verificar isso aqui... É um chutão :p
+app.get('/cart', function(req, res){
 
   pg.connect(connectionString, function(err, client, done) {
 
       var results = [];
-      var query = client.query("SELECT * FROM carrinho WHERE carrinho.uid=$1",request.params.uid);
+      var query = client.query("SELECT * FROM CARRINHOS INNER JOIN PRODUTOS ON PRODUTOS.ID = CARRINHOS.PRODUTO_ID WHERE USUARIO_ID = $1",[req.query.user_id]);
+
+      query.on('row', function(row) {
+          results.push(row);
+      });
+
+      query.on('end', function() {
+          client.end();
+          res.render('cart', {produtos: results, user: req.user});
+      });
+
+      if(err) {
+        console.log(err);
+      }
+
+  });
+});
+
+app.post('/cart/:id', function(req, res){
+
+  pg.connect(connectionString, function(err, client, done) {
+
+      var results = [];
+      var query = client.query("UPDATE CARRINHOS SET quantidade = $1 WHERE ID = $1",[req.body.quantidade, req.query.user_id]);
 
       query.on('row', function(row) {
           results.push(row);

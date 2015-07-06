@@ -6,10 +6,11 @@
 		<link rel="stylesheet" type="text/css" href="../style/mainStyle.css">
 		<link rel="icon" type="image/x-icon" href="../imgs/smallLogo.png">
 		<link rel="stylesheet" href="../fonts/font-awesome-4.3.0/css/font-awesome.min.css">
+
 	</head>
 	<body>
 		<nav id="navbar">
-			<a href="/"><img id="img_logo" src="../imgs/logo.png" alt="website logo" />Inicial</a>
+			<a href="/"><img id="img_logo" src="/img/logo.png" alt="website logo" />Inicial</a>
 			<form action="/search" method="post">
 				<input type="text" name="nome" placeholder="Procurar..." />
 				<input id="search_button" type="submit" />
@@ -17,7 +18,7 @@
 			<div ID="google_login">
 			{{#if user}}
 				<h1>Olá, {{user.nome}}</h1>
-				<a id="cart_button" href="/cart/{{uid}}/"></a>
+				<a id="cart_button" href="/cart/?user_id={{user.id}}"></a>
 				<a href="/logout"> Logout</a>
 			{{else}}
 				<a href="/auth/google">Login com Google</a>
@@ -32,6 +33,7 @@
 			<div id="cartoes">
 				<span id="visa"></span><span id="masterCard"></span>
 			</div>
+
 			<ul id="socialMedias">
 				<li><a href="https://www.facebook.com" id="facebookLink" class="socialMediaLink fa fa-facebook">Facebook</a></li>
 				<li><a href="https://twitter.com/" id="twitterLink" class="socialMediaLink fa fa-twitter">Twitter</a></li>
