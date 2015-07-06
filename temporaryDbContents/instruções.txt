@@ -1,0 +1,3 @@
+Nome: o nome de cada protudo é o que vem depois de 'alterado_' no nome da pasta respectiva.
+Preço, pode colocar o que quiser para cada um (preços maiores para coisas mais complexas ou maiores, e ponha um preço de 120.000,00 pro iglu da apple (iGlu).
+A descrição e imagem de cada item está dentro da respectiva pasta.
