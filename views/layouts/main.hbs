@@ -16,7 +16,7 @@
 			<div ID="google_login">
 			{{#if user}}
 				<h1>Olá, {{user.nome}}</h1>
-				<a id="cart_button" href="/cart/{{uid}}/"></a>
+				<a id="cart_button" href="/cart/?user_id={{user.id}}"></a>
 				<a href="/logout"> Logout</a>
 			{{else}}
 				<a href="/auth/google">Login com Google</a>
