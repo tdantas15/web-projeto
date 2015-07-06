@@ -68,7 +68,7 @@ var findOrCreateUser = function(name, googleId, callback){
   pg.connect(connectionString, function(err, client, done) {
 
       var results = [];
-      var query = client.query("SELECT * FROM usuarios where google_id = $1", [data[0]]);
+      var query = client.query("SELECT * FROM usuarios WHERE google_id = $1", [data[0]]);
       query.on('row', function(row) {
 
           results.push(row);
@@ -76,7 +76,7 @@ var findOrCreateUser = function(name, googleId, callback){
 
       query.on('end', function() {
           if (results.length == 0) {
-            var queryInsert = client.query("insert into usuarios (google_id, nome) values ($1, $2)", data);
+            var queryInsert = client.query("INSERTO INTO usuarios (google_id, nome) values ($1, $2)", data);
 
             queryInsert.on('end', function() {
                 client.end();

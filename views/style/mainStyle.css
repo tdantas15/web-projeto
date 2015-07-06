@@ -1,0 +1,128 @@
+html{
+	height:100%
+}
+body{
+	position:relative;
+	height:100%;
+	margin:0px;
+	text-align:center;
+	min-width:1286px;
+	background-image: url('../imgs/snowflakePattern.png');
+}
+
+#navbar{
+	float:left;
+	width:68%;
+	margin-left:16%;
+	margin-right:16%;
+	text-align:right;
+}
+#navbar *{
+	display:inline;
+}
+
+nav div a{
+	appearance:button;
+	-moz-appearance:button; /* Firefox */
+	-webkit-appearance:button; /* Safari and Chrome */
+	color: black;
+	text-decoration: none;
+	padding:3px;
+} 
+
+#img_logo{
+	position:absolute;
+	min-width:192px;
+	width:15%;
+	left:0px;
+	top:0px;
+}
+
+#search_button{
+	font-size: 0;
+	height:50px;
+	width:50px;
+	padding: 0;
+	margin:0;
+	border: none;
+	background: none;
+	background-image: url('../imgs/sprites.png');
+	background-repeat: no-repeat;
+	background-position:-150px 0;
+}
+#search_button:hover{
+	background-position:-150px -50px;
+	cursor: pointer;
+}
+
+#cart_button{
+	position:relative;
+	top:25px;
+	display:inline-block;
+	font-size: 0;
+	height:50px;
+	width:50px;
+	padding: 0;
+	margin:0;
+	border: none;
+	background: none;
+	background-image: url('../imgs/sprites.png');
+	background-repeat: no-repeat;
+	background-position:-50px 0;
+}
+#cart_button:hover{
+	background-position:-50px -50px;
+	cursor: pointer;
+}
+
+#content{
+	box-sizing:border-box;
+	padding-top:100px;
+	padding-bottom:100px;
+	badding-bottom:70px;
+	z-index:-1;
+	height:100%;
+	background-image:linear-gradient(
+		to right,
+		rgba(1,0,0,0),
+		#BBE7F5 2%,
+		#BBE7F5 98%,
+		rgba(0,0,0,0)
+	);
+	background-repeat: no-repeat;
+	min-width:900px;
+	margin-left:15%;
+	margin-right:15%;
+}
+
+#footer{
+	width:100%;
+	position:absolute;
+	bottom:0px;
+}
+#footer *{
+	display:inline;
+}
+
+#img_sharpshooter{
+	position:absolute;
+	width:20%;
+	right:0px;
+	bottom:0px;
+}
+
+#cartoes span{
+	display:inline-block;
+	height:50px;
+	width:100px;
+	padding: 0;
+	margin:0;
+	background-image: url('../imgs/sprites.png');
+	background-repeat: no-repeat;
+}
+#visa{
+	background-position:-200px 0;
+}
+#masterCard{
+	background-position:-200px -50px;
+}

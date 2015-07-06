@@ -2,37 +2,38 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title> Cold Shot : Artigos de Sobrevivência na Neve </title>
-		<link rel="stylesheet" type="text/css" href="/style/style.css">
+		<title> Cold Shot : Artigos de Sobrevivência Esquimó </title>
+		<link rel="stylesheet" type="text/css" href="../style/mainStyle.css">
+		<link rel="icon" type="image/x-icon" href="../imgs/smallLogo.png">
 	</head>
 	<body>
-		<nav>
-			<a href="/"><img id="img_logo" src="/imgs/logo.png" alt="website logo" /></a>
-			<a href="/">Inicial</a>
+		<nav id="navbar">
+			<a href="/"><img id="img_logo" src="../imgs/logo.png" alt="website logo" />Inicial</a>
 			<form action="/search" method="post">
-				<input type="text" name="nome" />
-				<input id="search_submit" type="submit" />
+				<input type="text" name="nome" placeholder="Procurar..." />
+				<input id="search_button" type="submit" />
 			</form>
-			<a id="cart_href" href="/cart/{{uid}}/"></a>
 			<div ID="google_login">
-				{{#if user}}
-  			<h1>{{user.nome}} Está Logado <a href="/logout"> Logout</a></h1>
-				{{else}}
-					<a href="/auth/google"> Login com Google </a>
+			{{#if user}}
+				<h1>Olá, {{user.nome}}</h1>
+				<a id="cart_button" href="/cart/{{uid}}/"></a>
+				<a href="/logout"> Logout</a>
+			{{else}}
+				<a href="/auth/google">Login com Google</a>
   			{{/if}}
 			</div>
 		</nav>
-
-	    {{{body}}}
-
-		<footer>
-			<img id="img_sharpshooter" src="/imgs/atirador.png" />
+		<section id="content">
+		    {{{body}}}
+		</section>
+		<footer id="footer">
+			<img id="img_sharpshooter" src="../imgs/atirador.png" />
 			<ul id="socialMedias">
 				<li><a href="https://www.facebook.com" id="facebookLink" class="socialMediaLink fa fa-facebook">Facebook</a></li>
 				<li><a href="https://twitter.com/" id="twitterLink" class="socialMediaLink fa fa-twitter">Twitter</a></li>
 				<li><a href="https://plus.google.com" id="googlePlusLink" class="socialMediaLink fa fa-google-plus">Google+</a></li>
-                        </ul>
-                        <div id="cartoes">
+	                </ul>
+	                <div id="cartoes">
 				<span id="visa"></span><span id="masterCard"></span>
 			</div>
 		</footer>
