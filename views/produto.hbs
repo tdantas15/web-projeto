@@ -4,7 +4,7 @@
 		<div id="description_wrapper">
 			<h1 id="detail_name">{{nome}}</h1>
 			{{#if ../user}}
-				<form action="/addItem" method="post">
+				<form action="/produtos/{{id}}/cart" method="post">
 					<input type="number" name="quantidade" min="1" placeholder="Qtd" />
 					<input id="add_button" type="submit" />
 				</form>

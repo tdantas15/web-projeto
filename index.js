@@ -200,7 +200,7 @@ app.get('/cart', function(req, res){
   pg.connect(connectionString, function(err, client, done) {
 
       var results = [];
-      var query = client.query("SELECT * FROM CARRINHOS INNER JOIN PRODUTOS ON PRODUTOS.ID = CARRINHOS.PRODUTO_ID WHERE USUARIO_ID = $1",[req.query.user_id]);
+      var query = client.query("SELECT * FROM CARRINHOS INNER JOIN PRODUTOS ON PRODUTOS.ID = CARRINHOS.PRODUTO_ID WHERE USUARIO_ID = $1",[req.user.id]);
 
       query.on('row', function(row) {
           results.push(row);
@@ -223,7 +223,7 @@ app.post('/produtos/:id/cart', function(req, res){
   pg.connect(connectionString, function(err, client, done) {
 
       var results = [];
-      var query = client.query("INSERT INTO CARRINHOS (USUARIO_ID, PRODUTO_ID, QUANTIDADE) VALUES ($1,$2,$3)",[req.user, req.params.id, req.body.quantidade]);
+      var query = client.query("INSERT INTO CARRINHOS (USUARIO_ID, PRODUTO_ID, QUANTIDADE) VALUES ($1,$2,$3)",[req.user.id, req.params.id, req.body.quantidade]);
 
       query.on('row', function(row) {
           results.push(row);
@@ -231,7 +231,7 @@ app.post('/produtos/:id/cart', function(req, res){
 
       query.on('end', function() {
           client.end();
-          res.render('cart', {produtos: results, user: req.user});
+          res.redirect('/cart');
       });
 
       if(err) {
