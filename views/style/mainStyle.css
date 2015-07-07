@@ -247,6 +247,9 @@ body{
 	display:inline-block;
 	width:250px;
 	height:250px;
+	-webkit-border-radius: 20px;
+	-moz-border-radius: 20px;
+	border-radius: 20px;
 }
 
 .list_text_wrapper{
@@ -289,6 +292,9 @@ body{
 	padding-left:3%
 	width:45%;
 	max-height:80%;
+	-webkit-border-radius: 20px;
+	-moz-border-radius: 20px;
+	border-radius: 20px;
 }
 
 #description_wrapper{
@@ -368,4 +374,19 @@ body{
 #botao_compra:hover{
 	background-position:-100px -50px;
 	cursor: pointer;
+}
+
+/*#################################################################################
+#############		Firula			###################################
+###################################################################################*/
+
+.outGlow{
+	-webkit-box-shadow: 0px 0px 21px 13px rgba(255,255,255,0.81);
+	-moz-box-shadow: 0px 0px 21px 13px rgba(255,255,255,0.81);
+	box-shadow: 0px 0px 21px 13px rgba(255,255,255,0.81); 
+}
+.inGlow{
+	-webkit-box-shadow: inset 0px 0px 14px 6px rgba(255,255,255,0.81);
+	-moz-box-shadow: inset 0px 0px 14px 6px rgba(255,255,255,0.81);
+	box-shadow: inset 0px 0px 14px 6px rgba(255,255,255,0.81);
 }
