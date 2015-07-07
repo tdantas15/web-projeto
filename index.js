@@ -208,21 +208,6 @@ app.get('/produtos/new', function(req, res){
   res.render('novo_produto', {user: req.user});
 });
 
-app.post('/produtos', function(req, res){
-  var results = [];
-  var data = req.body;
-  pg.connect(connectionString, function(err, client, done) {
-      query = client.query("INSERT INTO produtos(nome, preco, descricao, imagem) values($1, $2, $3, $4)", [data.nome, data.preco, data.descricao, data.imagem]);
-      query.on('end', function() {
-          client.end();
-          res.redirect('/produtos');
-      });
-      if(err) {
-        console.log(err);
-      }
-  });
-});
-
 app.post('/search', function(req, res){
   var results = [];
   var data = req.body;
