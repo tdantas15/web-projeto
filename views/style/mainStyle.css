@@ -15,13 +15,23 @@ body{
 
 /*Barra superior de navegação*/
 #navbar{
-	float:left;
-	width:68%;
-	margin-left:16%;
-	margin-right:16%;
+	position: absolute;
+	width:66%;
+	margin-left: 17%;
+	margin-right: 17%;
 	text-align:right;
+	background-image:linear-gradient(
+		to bottom,
+		#BBE7F5,
+		#BBE7F5 80%,
+		rgba(0,0,0,0)
+	);
 }
-#navbar *{
+
+#navbar_content{
+	float:right;
+}
+#navbar_content *{
 	display:inline;
 }
 
@@ -85,10 +95,10 @@ nav div a{
 /*Conteúdo a ser preenchido pelos outros layouts*/
 #content{
 	overflow-y: auto;
+	clear:both;
 	box-sizing:border-box;
-	padding-top:100px;
-	padding-bottom:100px;
-	badding-bottom:70px;
+	padding-top:180px;
+	padding-bottom:80px;
 	z-index:-1;
 	height:100%;
 	background-image:linear-gradient(
@@ -106,12 +116,20 @@ nav div a{
 
 /*Rodapé*/
 #footer{
-	width:100%;
+	width:66%;
+	margin-left: 17%;
+	margin-right: 17%;
 	position:absolute;
 	bottom:0px;
 }
 #footer *{
 	display:inline;
+	background-image:linear-gradient(
+		to top,
+		#BBE7F5,
+		#BBE7F5 80%,
+		rgba(0,0,0,0)
+	);
 }
 
 /*Sprites de Cartões aceitos*/
