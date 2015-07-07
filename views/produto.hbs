@@ -3,6 +3,14 @@
 		<img src="{{imagem}}" id="detail_image" alt="{{nome}} product image" />
 		<div id="description_wrapper">
 			<h1 id="detail_name">{{nome}}</h1>
+			{{#if user}}
+				<form action="/addItem" method="post">
+					<input type="number" name="quantidade" min="1" placeholder="Qtd" />
+					<input id="add_button" type="submit" />
+				</form>
+			{{else}}
+				<p id="login_warning">Faça login para comprar este produto!</p>
+  			{{/if}}
 			<hr><br>
 			<span id="detail_price">R&#36;{{preco}}</span><br>
 			<p id="detail_description">{{descricao}}</p>
