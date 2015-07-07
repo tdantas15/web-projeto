@@ -9,6 +9,7 @@ var session = require('express-session');
 var passport = require('passport');
 var GoogleStrategy = require('passport-google-oauth2').Strategy;
 var connectionString = process.env.DATABASE_URL || 'postgres://postgres:123456@localhost:5432/supermercado';
+var methodOverride = require('method-override');
 app.set('port', (process.env.PORT || 3000));
 
 var sess = {
@@ -40,6 +41,8 @@ app.engine('hbs', hbs.express4({
 app.set('view engine', 'hbs');
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(methodOverride('_method'));
+
 
 
 passport.use(new GoogleStrategy({
@@ -119,29 +122,22 @@ var findProductInCart = function(user_id,product_id){
 };
 
 
-var updateProductInCart = function(cart_id, quantidade){
+var updateProductInCart = function(cart_id, quantidade, res){
 
   pg.connect(connectionString, function(err, client, done) {
 
-      var results = [];
-      var query = client.query("UPDATE CARRINHOS SET quantidade = $1 WHERE ID = $1",[quantidade, cart_id]);
-      query.on('row', function(row) {
-          results.push(row);
+      var query = client.query("UPDATE CARRINHOS SET quantidade = $1 WHERE ID = $2",[quantidade, cart_id], function(err, result){
+        if(err) {
+          console.log(err);
+        } else {
+          client.end();
+          res.redirect('/cart');
+        }
       });
-
-      query.on('end', function() {
-        client.end();
-        return results;
-      });
-
-      if(err) {
-        console.log(err);
-      }
-    })
+    });
 };
 
 var deleteCart = function(cart_id){
-  debugger;
   pg.connect(connectionString, function(err, client, done) {
 
       var results = [];
@@ -152,7 +148,6 @@ var deleteCart = function(cart_id){
 
       query.on('end', function() {
         client.end();
-        return results;
       });
 
       if(err) {
@@ -173,7 +168,6 @@ var addProductToCart = function(user_id,product_id, quantidade){
 
       query.on('end', function() {
         client.end();
-        return results;
       });
 
       if(err) {
@@ -282,14 +276,13 @@ app.get('/cart', function(req, res){
   pg.connect(connectionString, function(err, client, done) {
 
       var results = [];
-      var query = client.query("SELECT * FROM CARRINHOS INNER JOIN PRODUTOS ON PRODUTOS.ID = CARRINHOS.PRODUTO_ID WHERE USUARIO_ID = $1",[req.user.id]);
+      var query = client.query("SELECT * FROM PRODUTOS INNER JOIN CARRINHOS ON PRODUTOS.ID = CARRINHOS.PRODUTO_ID WHERE USUARIO_ID = $1",[req.user.id]);
 
       query.on('row', function(row) {
           results.push(row);
       });
 
       query.on('end', function() {
-          debugger;
           client.end();
           res.render('cart', {produtos: results, user: req.user});
       });
@@ -307,13 +300,11 @@ app.post('/produtos/:id/cart', function(req, res){
 });
 
 app.put('/cart/:id', function(req, res){
-  updateProductInCart(req.params.id, req.body.quantidade);
-  res.redirect('/cart');
+  updateProductInCart(req.params.id, req.body.quantidade, res);
 });
 
 app.delete('/cart/:id', function(req, res){
   deleteCart(req.params.id);
-  res.redirect('/cart');
 });
 
 app.get('/produto/:id', function(req, res){
