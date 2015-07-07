@@ -96,7 +96,7 @@ body{
 }
 
 /*container para esconder a barra de rolagem*/
-#scrollHide{
+#content_scroll_hide{
 	text-align: center;
 	overflow-y: hidden;
 	overflow-x:hidden;
