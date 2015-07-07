@@ -242,12 +242,11 @@ app.post('/cart/:id', function(req, res){
 });
 
 app.get('/produto/:id', function(req, res){
-  var data = req.body;
 
   pg.connect(connectionString, function(err, client, done) {
 
       var results = [];
-      var query = client.query("SELECT * FROM produtos WHERE produtos.id=$1",[data.id]);
+      var query = client.query("SELECT * FROM produtos WHERE produtos.id=$1",[req.params.id]);
 
       query.on('row', function(row) {
           results.push(row);
