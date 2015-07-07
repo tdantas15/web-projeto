@@ -1,8 +1,11 @@
   {{#each produtos}}
-	<div class="produto_detalhado">
-		<h1 id="detail_name">{{nome}}</h1>
-		<img src="{{imagem}}" class="detail_image" alt="{{nome}} product image" />
-		<span id="detail_description">{{descricao}}</span>
-		<span id="detail_price">R&#36;{{preco}}</span>
-	</div>
+	<article id="produto_detalhado">
+		<img src="{{imagem}}" id="detail_image" alt="{{nome}} product image" />
+		<div id="description_wrapper">
+			<h1 id="detail_name">{{nome}}</h1>
+			<hr><br>
+			<span id="detail_price">R&#36;{{preco}}</span><br>
+			<p id="detail_description">{{descricao}}</p>
+		</div>
+	</article>
   {{/each}}
