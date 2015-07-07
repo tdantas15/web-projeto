@@ -19,7 +19,7 @@ body{
 	width:66%;
 	margin-left: 17%;
 	margin-right: 17%;
-	text-align:right;
+	text-align:left;
 	background-image:linear-gradient(
 		to bottom,
 		#BBE7F5,
@@ -35,7 +35,8 @@ body{
 	display:inline;
 }
 
-nav div a{
+#google_login a{
+	display:inline-block;
 	/*Transformando links em botões*/
 	appearance:button;
 	-moz-appearance:button; /* Firefox */
@@ -121,15 +122,15 @@ nav div a{
 	margin-right: 17%;
 	position:absolute;
 	bottom:0px;
-}
-#footer *{
-	display:inline;
 	background-image:linear-gradient(
 		to top,
 		#BBE7F5,
 		#BBE7F5 80%,
 		rgba(0,0,0,0)
 	);
+}
+#footer *{
+	display:inline;
 }
 
 /*Sprites de Cartões aceitos*/
@@ -252,7 +253,5 @@ nav div a{
 	font-size:x-large;
 	text-align:center;
 	display:block;
-	position:relative;
 	top:20%;
-	z-index:0;
 }
