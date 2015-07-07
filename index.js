@@ -33,6 +33,7 @@ app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use("/style", express.static(__dirname + '/views/style'));
 app.use("/img", express.static(__dirname + '/views/imgs'));
+app.use("/javascripts", express.static(__dirname + '/views/javascripts'));
 app.use("/fonts", express.static(__dirname + '/views/fonts'));
 app.use("/img-produtos", express.static(__dirname + '/temporaryDbContents'));
 app.engine('hbs', hbs.express4({
@@ -123,9 +124,7 @@ var findProductInCart = function(user_id,product_id){
 
 
 var updateProductInCart = function(cart_id, quantidade, res){
-
   pg.connect(connectionString, function(err, client, done) {
-
       var query = client.query("UPDATE CARRINHOS SET quantidade = $1 WHERE ID = $2",[quantidade, cart_id], function(err, result){
         if(err) {
           console.log(err);
@@ -137,43 +136,43 @@ var updateProductInCart = function(cart_id, quantidade, res){
     });
 };
 
-var deleteCart = function(cart_id){
+var deleteCart = function(cart_id, res){
   pg.connect(connectionString, function(err, client, done) {
-
-      var results = [];
-      var query = client.query("DELETE FROM CARRINHOS WHERE ID = $1",[cart_id]);
-      query.on('row', function(row) {
-          results.push(row);
-      });
-
-      query.on('end', function() {
-        client.end();
-      });
-
+    var query = client.query("DELETE FROM CARRINHOS WHERE ID = $1",[cart_id], function(err, result){
       if(err) {
         console.log(err);
+        res.status(500).send();
+      } else {
+        client.end();
+        res.status(200).send();
       }
-    })
+    });
+  });
+};
+
+var deleteCartsFromUser = function(user_id, res){
+  pg.connect(connectionString, function(err, client, done) {
+    var query = client.query("DELETE FROM CARRINHOS WHERE USUARIO_ID = $1",[user_id], function(err, result){
+      if(err) {
+        console.log(err);
+      } else {
+        client.end();
+        res.redirect('/cart');
+      }
+    });
+  });
 };
 
 var addProductToCart = function(user_id,product_id, quantidade){
-
-  pg.connect(connectionString, function(err, client, done) {
-
-      var results = [];
-      var query = client.query("INSERT INTO CARRINHOS (USUARIO_ID, PRODUTO_ID, QUANTIDADE) VALUES ($1,$2,$3)",[user_id, product_id, quantidade]);
-      query.on('row', function(row) {
-          results.push(row);
+    pg.connect(connectionString, function(err, client, done) {
+      var query = client.query("INSERT INTO CARRINHOS (USUARIO_ID, PRODUTO_ID, QUANTIDADE) VALUES ($1,$2,$3)",[user_id, product_id, quantidade], function(err, result){
+        if(err) {
+          console.log(err);
+        } else {
+          client.end();
+        }
       });
-
-      query.on('end', function() {
-        client.end();
-      });
-
-      if(err) {
-        console.log(err);
-      }
-    })
+    });
 };
 
 
@@ -272,26 +271,30 @@ app.post('/search', function(req, res){
 
 
 app.get('/cart', function(req, res){
+  if (req.user == undefined){
+    res.redirect("/");
+  } else {
+    user_id = req.user.id;
+    pg.connect(connectionString, function(err, client, done) {
 
-  pg.connect(connectionString, function(err, client, done) {
+        var results = [];
+        var query = client.query("SELECT * FROM PRODUTOS INNER JOIN CARRINHOS ON PRODUTOS.ID = CARRINHOS.PRODUTO_ID WHERE USUARIO_ID = $1",[user_id]);
 
-      var results = [];
-      var query = client.query("SELECT * FROM PRODUTOS INNER JOIN CARRINHOS ON PRODUTOS.ID = CARRINHOS.PRODUTO_ID WHERE USUARIO_ID = $1",[req.user.id]);
+        query.on('row', function(row) {
+            results.push(row);
+        });
 
-      query.on('row', function(row) {
-          results.push(row);
-      });
+        query.on('end', function() {
+            client.end();
+            res.render('cart', {produtos: results, user: req.user});
+        });
 
-      query.on('end', function() {
-          client.end();
-          res.render('cart', {produtos: results, user: req.user});
-      });
+        if(err) {
+          console.log(err);
+        }
 
-      if(err) {
-        console.log(err);
-      }
-
-  });
+    });
+}
 });
 
 app.post('/produtos/:id/cart', function(req, res){
@@ -304,7 +307,11 @@ app.put('/cart/:id', function(req, res){
 });
 
 app.delete('/cart/:id', function(req, res){
-  deleteCart(req.params.id);
+  deleteCart(req.params.id, res);
+});
+
+app.post('/buy', function(req, res){
+  deleteCartsFromUser(req.user.id, res);
 });
 
 app.get('/produto/:id', function(req, res){
