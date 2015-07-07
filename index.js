@@ -218,12 +218,35 @@ app.get('/cart', function(req, res){
   });
 });
 
+app.post('/produtos/:id/cart', function(req, res){
+
+  pg.connect(connectionString, function(err, client, done) {
+
+      var results = [];
+      var query = client.query("INSERT INTO CARRINHOS (USUARIO_ID, PRODUTO_ID, QUANTIDADE) VALUES ($1,$2,$3)",[req.user, req.params.id, req.body.quantidade]);
+
+      query.on('row', function(row) {
+          results.push(row);
+      });
+
+      query.on('end', function() {
+          client.end();
+          res.render('cart', {produtos: results, user: req.user});
+      });
+
+      if(err) {
+        console.log(err);
+      }
+
+  });
+});
+
 app.post('/cart/:id', function(req, res){
 
   pg.connect(connectionString, function(err, client, done) {
 
       var results = [];
-      var query = client.query("UPDATE CARRINHOS SET quantidade = $1 WHERE ID = $1",[req.body.quantidade, req.query.user_id]);
+      var query = client.query("UPDATE CARRINHOS SET quantidade = $1 WHERE ID = $1",[req.body.quantidade, req.params.id]);
 
       query.on('row', function(row) {
           results.push(row);
