@@ -1,24 +1,29 @@
-<h2>Seu Carrinho</h2>
-<article>
+<h1>Seu Carrinho</h1>
+<article id="cart_list">
 	<ul class="compact_product_list">
 	{{#each produtos}}
 		<li class="product_entry">
 			<a href="/produto/{{id}}/"><img src="{{imagem}}" class="compact_image" alt="{{nome}} product image" /></a>
-			<span class="compact_name"><a href="/produto/{{id}}/">{{nome}}</a></span>
-			<span class="compact_price">R&#36;{{preco}}</span>
-			<span class="compact_quantity">{{quantidade}}</span>
-			<form action="" method="post">
-				<input type="number" name="quantidade" min="0" />
-				<input type="submit" value="Alterar" />
+			<div class="list_text_wrapper">
+				<span class="compact_name"><a href="/produto/{{id}}/">{{nome}}</a></span>
+				<span class="compact_price">R&#36;{{preco}}</span>
+				<span class="compact_quantity">{{quantidade}}</span>
+				<form class="alter_qtd_form" name="alter_qtd_form" action="/cartUpdate" method="post">
+					<input type="number" name="quantidade" min="0" max="100" placeholder="{{quantidade}}" value="{{quantidade}}"/>
+					<input type="submit" value="Alterar" />
+				</form>
+			</div>
+			<!-- coloquei o botão seguinte dentro de um form pra não ter que criar um js em separado pra ação do botão -->
+			<form class="remove_item_form" name="remove_item_form" action="/cartUpdate" method="post">
+				<input class="remove_item_button" type="submit" value="Remover" />
 			</form>
-			<button type="button">Remover</button>
-			<br />-------------------------------------------------<br />
 		</li>
 	{{/each}}
 	</ul>
-	<span class="cart_total">Total ({{qtd_items}}): R&#36;{{preco_total}}</span>
+	<p class="cart_total">Total ({{qtd_items}}): R&#36;{{preco_total}}</p>
 </article>
-<article id="cart_lateral_total">
-	<span class="cart_total">Total ({{qtd_items}}): R&#36;{{preco_total}}</span>
-	<button type="button">Comprar!</button> 
+<article id="cart_resume">
+	<p class="cart_total">Total ({{qtd_items}}): R&#36;{{preco_total}}</p>
+	<!-- associar a uma função que alerte a compra e limpe o carrinho -->
+	<button id="botao_compra" type="button">Comprar!</button> 
 </article>

@@ -311,3 +311,61 @@ body{
 	font-size:x-large;
 	display:inline;
 }
+
+/*#################################################################################
+#############		Carrinho de Compras	###################################
+###################################################################################*/
+
+#cart_list{
+	display:inline-block;
+	padding-left:3%;
+	width:72%;
+	overflow-x:hidden;
+	overflow-y:auto;
+}
+
+#cart_resume{
+	display:inline-block;
+	padding-left:2%;
+	padding-right:3%;
+	width:20%;
+}
+
+.compact_quantity{
+	font-size:x-large;
+	display:inline;
+}
+
+.remove_item_button{
+	font-size: 0;
+	height:50px;
+	width:50px;
+	padding: 0;
+	margin:0;
+	border: none;
+	background: none;
+	background-image: url('/img/sprites.png');
+	background-repeat: no-repeat;
+	background-position:0 0;
+}
+.remove_item_button:hover{
+	background-position:0 -50px;
+	cursor: pointer;
+}
+
+#botao_compra{
+	font-size: 0;
+	height:50px;
+	width:50px;
+	padding: 0;
+	margin:0;
+	border: none;
+	background: none;
+	background-image: url('/img/sprites.png');
+	background-repeat: no-repeat;
+	background-position:-100px 0;
+}
+#botao_compra:hover{
+	background-position:-100px -50px;
+	cursor: pointer;
+}
