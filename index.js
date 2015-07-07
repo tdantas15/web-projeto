@@ -233,7 +233,6 @@ app.post('/search', function(req, res){
       });
       query.on('end', function() {
           client.end();
-          console.log(results);
           res.render('index', {produtos: results, user: req.user});
       });
       if(err) {
@@ -266,12 +265,20 @@ app.get('/cart', function(req, res){
 });
 
 app.post('/produtos/:id/cart', function(req, res){
-  addProductToCart(req.user.id,req.params.id, req.body.quantidade);
-  res.redirect('/cart');
+  if (req.body.quantidade != "") {
+    addProductToCart(req.user.id,req.params.id, req.body.quantidade);
+    res.redirect('/cart');
+  } else{
+    res.redirect('/produto/'+req.params.id);
+  }
 });
 
 app.put('/cart/:id', function(req, res){
-  updateProductInCart(req.params.id, req.body.quantidade, res);
+  if (req.body.quantidade != "") {
+    updateProductInCart(req.params.id, req.body.quantidade, res);
+  } else {
+    res.redirect('/cart');
+  }
 });
 
 app.delete('/cart/:id', function(req, res){
