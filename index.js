@@ -49,8 +49,8 @@ app.use(methodOverride('_method'));
 passport.use(new GoogleStrategy({
     clientID:     "1046465514072-fcviu9lgrrba8kijtg45bffv0hpuur0g.apps.googleusercontent.com",
     clientSecret: "Db8alN06xD6lJfIftlaLdwf1",
-    //callbackURL: "http://young-cove-1583.herokuapp.com/auth/google/callback",
-    callbackURL: "http://www.eskimo.com.br:3000/auth/google/callback",
+    callbackURL: "http://young-cove-1583.herokuapp.com/auth/google/callback",
+    //callbackURL: "http://www.eskimo.com.br:3000/auth/google/callback",
     passReqToCallback   : true
   },
   function(request, accessToken, refreshToken, profile, done) {
