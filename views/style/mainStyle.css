@@ -15,6 +15,7 @@ body{
 
 /*Barra superior de navegação*/
 #navbar{
+	z-index:1;
 	position: absolute;
 	width:66%;
 	margin-left: 17%;
@@ -97,11 +98,11 @@ body{
 /*Conteúdo a ser preenchido pelos outros layouts*/
 #content{
 	overflow-y: auto;
+	overflow-x: hidden;
 	clear:both;
 	box-sizing:border-box;
 	padding-top:180px;
 	padding-bottom:80px;
-	z-index:-1;
 	height:100%;
 	background-image:linear-gradient(
 		to right,
@@ -214,6 +215,7 @@ body{
 	bottom:0px;
 }
 
+
 /*#################################################################################
 #############		Lista de Exibição	###################################
 ###################################################################################*/
@@ -225,26 +227,31 @@ body{
 .product_entry{
 	float:left;
 	display:inline;
-	width:45%;
-	margin-right:5%;
+	width:48%;
+	margin-right:2%;
 	text-shadow: 9px 13px 2px rgba(122, 131, 200, 0.9);
 	height:280px;
+	position:relative;
 }
 
-.product_entry img{
+.compact_img{
 	display:inline-block;
 	width:250px;
 	height:250px;
-	z-index:1;
 }
 
 .text_wrapper{
 	display:inline-block;
+	position:absolute;
+}
+.text_wrapper hr{
+	display:inline-block;
+	width:60%;
 }
 
 .compact_name{
 	display:block;
-	text-align:center;
+	text-align:left;
 }
 .compact_name a{
 	color:#13227E;
@@ -255,7 +262,11 @@ body{
 
 .compact_price{
 	font-size:x-large;
-	text-align:center;
-	display:block;
-	top:20%;
+	display:inline;
 }
+
+/*#################################################################################
+#############		Produto Detalhado	###################################
+###################################################################################*/
+
+
