@@ -94,10 +94,92 @@ var findOrCreateUser = function(name, googleId, callback){
       if(err) {
         console.log(err);
       }
-
-
     })
+};
 
+var findProductInCart = function(user_id,product_id){
+
+  pg.connect(connectionString, function(err, client, done) {
+
+      var results = [];
+      var query = client.query("SELECT * FROM cart WHERE user_id = $1 and product_id = $2", [user_id, product_id]);
+      query.on('row', function(row) {
+          results.push(row);
+      });
+
+      query.on('end', function() {
+        client.end();
+        return results;
+      });
+
+      if(err) {
+        console.log(err);
+      }
+    })
+};
+
+
+var updateProductInCart = function(cart_id, quantidade){
+
+  pg.connect(connectionString, function(err, client, done) {
+
+      var results = [];
+      var query = client.query("UPDATE CARRINHOS SET quantidade = $1 WHERE ID = $1",[quantidade, cart_id]);
+      query.on('row', function(row) {
+          results.push(row);
+      });
+
+      query.on('end', function() {
+        client.end();
+        return results;
+      });
+
+      if(err) {
+        console.log(err);
+      }
+    })
+};
+
+var deleteCart = function(cart_id){
+  debugger;
+  pg.connect(connectionString, function(err, client, done) {
+
+      var results = [];
+      var query = client.query("DELETE FROM CARRINHOS WHERE ID = $1",[cart_id]);
+      query.on('row', function(row) {
+          results.push(row);
+      });
+
+      query.on('end', function() {
+        client.end();
+        return results;
+      });
+
+      if(err) {
+        console.log(err);
+      }
+    })
+};
+
+var addProductToCart = function(user_id,product_id, quantidade){
+
+  pg.connect(connectionString, function(err, client, done) {
+
+      var results = [];
+      var query = client.query("INSERT INTO CARRINHOS (USUARIO_ID, PRODUTO_ID, QUANTIDADE) VALUES ($1,$2,$3)",[user_id, product_id, quantidade]);
+      query.on('row', function(row) {
+          results.push(row);
+      });
+
+      query.on('end', function() {
+        client.end();
+        return results;
+      });
+
+      if(err) {
+        console.log(err);
+      }
+    })
 };
 
 
@@ -207,6 +289,7 @@ app.get('/cart', function(req, res){
       });
 
       query.on('end', function() {
+          debugger;
           client.end();
           res.render('cart', {produtos: results, user: req.user});
       });
@@ -219,49 +302,18 @@ app.get('/cart', function(req, res){
 });
 
 app.post('/produtos/:id/cart', function(req, res){
-
-  pg.connect(connectionString, function(err, client, done) {
-
-      var results = [];
-      var query = client.query("INSERT INTO CARRINHOS (USUARIO_ID, PRODUTO_ID, QUANTIDADE) VALUES ($1,$2,$3)",[req.user.id, req.params.id, req.body.quantidade]);
-
-      query.on('row', function(row) {
-          results.push(row);
-      });
-
-      query.on('end', function() {
-          client.end();
-          res.redirect('/cart');
-      });
-
-      if(err) {
-        console.log(err);
-      }
-
-  });
+  addProductToCart(req.user.id,req.params.id, req.body.quantidade);
+  res.redirect('/cart');
 });
 
-app.post('/cart/:id', function(req, res){
+app.put('/cart/:id', function(req, res){
+  updateProductInCart(req.params.id, req.body.quantidade);
+  res.redirect('/cart');
+});
 
-  pg.connect(connectionString, function(err, client, done) {
-
-      var results = [];
-      var query = client.query("UPDATE CARRINHOS SET quantidade = $1 WHERE ID = $1",[req.body.quantidade, req.params.id]);
-
-      query.on('row', function(row) {
-          results.push(row);
-      });
-
-      query.on('end', function() {
-          client.end();
-          res.render('cart', {produtos: results, user: req.user});
-      });
-
-      if(err) {
-        console.log(err);
-      }
-
-  });
+app.delete('/cart/:id', function(req, res){
+  deleteCart(req.params.id);
+  res.redirect('/cart');
 });
 
 app.get('/produto/:id', function(req, res){

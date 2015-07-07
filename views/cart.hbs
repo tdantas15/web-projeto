@@ -14,8 +14,8 @@
 				</form>
 			</div>
 			<!-- coloquei o botão seguinte dentro de um form pra não ter que criar um js em separado pra ação do botão -->
-			<form class="remove_item_form" name="remove_item_form" action="/cartUpdate" method="post">
-				<input class="remove_item_button" type="submit" value="Remover" />
+			<form>
+				<input id="{{id}}" class="remove_item_button" value="Remover" />
 			</form>
 		</li>
 	{{/each}}
@@ -25,5 +25,20 @@
 <article id="cart_resume">
 	<p class="cart_total">Total ({{qtd_items}}): R&#36;{{preco_total}}</p>
 	<!-- associar a uma função que alerte a compra e limpe o carrinho -->
-	<button id="botao_compra" type="button">Comprar!</button> 
+	<button id="botao_compra" type="button">Comprar!</button>
 </article>
+
+<script type="text/javascript">
+	var elements = document.getElementsByClassName("remove_item_button");
+	for (var i=0; i<elements.length;i++){
+		elements[i].addEventListener("click", function(e) {
+			var xmlhttp = new XMLHttpRequest();
+
+	    xmlhttp.onreadystatechange = function(){
+	    }
+	    xmlhttp.open("DELETE", "/cart/" + this.id, true);
+	    xmlhttp.send();
+		}.bind(elements[i]));
+	}
+
+</script>
