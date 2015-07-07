@@ -232,10 +232,14 @@ body{
 }
 
 .product_entry img{
-	float:left;
+	display:inline-block;
 	width:250px;
 	height:250px;
 	z-index:1;
+}
+
+.text_wrapper{
+	display:inline-block;
 }
 
 .compact_name{
@@ -250,7 +254,6 @@ body{
 }
 
 .compact_price{
-	margin-left:250px;
 	font-size:x-large;
 	text-align:center;
 	display:block;
