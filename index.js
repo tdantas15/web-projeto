@@ -33,6 +33,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use("/style", express.static(__dirname + '/views/style'));
 app.use("/img", express.static(__dirname + '/views/imgs'));
 app.use("/fonts", express.static(__dirname + '/views/fonts'));
+app.use("/produtos", express.static(__dirname + '/temporaryDbContents'));
 app.engine('hbs', hbs.express4({
   defaultLayout: __dirname +"/views/layouts/main.hbs"
 }));
