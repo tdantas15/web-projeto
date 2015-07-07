@@ -1,19 +1,19 @@
-  {{#each produtos}}
+{{#each produtos}}
 	<article id="produto_detalhado">
-		<img src="{{imagem}}" id="detail_image" class="outGlow inGlow" alt="{{nome}} product image" />
+		<img src="{{imagem}}" id="detail_image" class="outGlow" alt="{{nome}} product image" />
 		<div id="description_wrapper">
 			<h1 id="detail_name">{{nome}}</h1>
 			{{#if ../user}}
 				<form action="/produtos/{{id}}/cart" method="post">
 					<input type="number" name="quantidade" min="1" placeholder="Qtd" />
-					<input id="add_button" type="submit" />
+					<input id="add_button" type="submit" value="Adicionar ao Carrinho!" />
 				</form>
 			{{else}}
 				<p id="login_warning">Faça login para comprar este produto!</p>
-  			{{/if}}
+			{{/if}}
 			<hr><br>
 			<span id="detail_price">R&#36;{{preco}}</span><br>
 			<p id="detail_description">{{descricao}}</p>
 		</div>
 	</article>
-  {{/each}}
+{{/each}}
