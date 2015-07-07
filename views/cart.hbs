@@ -3,7 +3,7 @@
 	<ul class="compact_product_list">
 	{{#each produtos}}
 		<li class="product_entry">
-			<a href="/produto/{{id}}/"><img src="{{imagem}}" class="compact_image outGlow inGlow" alt="{{nome}} product image" /></a>
+			<a href="/produto/{{produto_id}}/"><img src="{{imagem}}" class="compact_image outGlow inGlow" alt="{{nome}} product image" /></a>
 			<div class="list_text_wrapper">
 				<span class="compact_name"><a href="/produto/{{id}}/">{{nome}}</a></span>
 				<span class="compact_price">R&#36;{{preco}}</span>
@@ -23,24 +23,12 @@
 	<p class="cart_total">Total ({{qtd_items}}): R&#36;{{preco_total}}</p>
 </article>
 <article id="cart_resume">
-	<p class="cart_total">Total ({{qtd_items}}): R&#36;{{preco_total}}</p>
-	<!-- associar a uma função que alerte a compra e limpe o carrinho -->
-	<button id="botao_compra" type="button">Comprar!</button>
+	<form action="/buy" method="POST">
+		<p class="cart_total">Total ({{qtd_items}}): R&#36;{{preco_total}}</p>
+		<!-- associar a uma função que alerte a compra e limpe o carrinho -->
+		<button id="botao_compra" type="submit">Comprar!</button>
+	</form>
 </article>
-
 <script type="text/javascript">
-	var elements = document.getElementsByClassName("remove_item_button");
-	for (var i=0; i<elements.length;i++){
-		elements[i].addEventListener("click", function(e) {
-			var xmlhttp = new XMLHttpRequest();
-			var element = this;
-	    xmlhttp.onreadystatechange = function(){
-				if (xmlhttp.readyState==4){
-					document.getElementById(element.id).parentNode.parentNode.remove();
-				}
-	    };
-	    xmlhttp.open("DELETE", "/cart/" + this.id, true);
-	    xmlhttp.send();
-		}.bind(elements[i]));
-	}
+	initializeRemoveFromCart();
 </script>
