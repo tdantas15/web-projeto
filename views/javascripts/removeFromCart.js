@@ -20,7 +20,7 @@ var initializeRemoveFromCart = function(){
 
 var calcularQuantidade = function (){
   var soma = 0;
-  var elements = document.getElementsByClassName("compact_quantity");
+  var elements = document.getElementsByClassName("cart_quantity");
   for (var i=0; i<elements.length;i++){
     soma += parseInt(elements[i].textContent);
   }
@@ -29,8 +29,8 @@ var calcularQuantidade = function (){
 
 var calcularPrecoTotal = function (){
   var soma = 0;
-  var elements = document.getElementsByClassName("compact_price");
-  var quantidades = document.getElementsByClassName("compact_quantity");
+  var elements = document.getElementsByClassName("cart_price");
+  var quantidades = document.getElementsByClassName("cart_quantity");
   for (var i=0; i<elements.length;i++){
     soma += (parseInt(elements[i].textContent.substr(2))) * parseInt(quantidades[i].textContent);
   }
