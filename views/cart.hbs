@@ -10,7 +10,7 @@
 					<span class="cart_quantity">{{quantidade}}</span> x <span class="cart_price">R&#36;{{preco}}</span>
 
 					<form class="alter_qtd_form" name="alter_qtd_form" action="/cart/{{id}}?_method=PUT" method="post">
-						<input type="number" name="quantidade" min="0" max="100" placeholder="{{quantidade}}" value="{{quantidade}}"/>
+						<input type="number" name="quantidade" min="1" max="100" placeholder="{{quantidade}}" value="{{quantidade}}"/>
 						<input type="submit" value="Alterar" />
 					</form>
 				</div>
