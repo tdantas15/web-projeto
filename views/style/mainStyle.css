@@ -324,53 +324,48 @@ body{
 #############		Carrinho de Compras	###################################
 ###################################################################################*/
 #cart_wrapper{
-	box-sizing:border-box;
-	padding-bottom:80px;
+	overflow:hidden;
+	position:relative;
 	height:100%;
 }
 
 #cart_list{
-	display:inline-block;
-	padding-left:3%;
-	width:72%;
 	overflow-x:hidden;
-	overflow-y:auto;
+	height:80%
 	
 }
 
 #cart_resume{
-	display:inline-block;
-	padding-left:2%;
-	padding-right:3%;
 	width:20%;
 }
 
 .cart_entry{
 	float:left;
-	display:inline;
+	display:inline-block;
 	width:48%;
-	margin-right:2%;
+	height:170px;
+	padding-right:2%;
+	text-align:left;
 	text-shadow: 9px 13px 2px rgba(122, 131, 200, 0.9);
-	height:280px;
 	position:relative;
 }
 
 .cart_image{
+	float:left;
 	display:inline-block;
-	width:250px;
-	height:250px;
+	width:140px;
+	height:140px;
 	-webkit-border-radius: 20px;
 	-moz-border-radius: 20px;
 	border-radius: 20px;
 }
 
 .cart_text_wrapper{
-	display:inline-block;
-	position:absolute;
+	display:block;
+	position:relative;
 }
 
 .cart_name{
-	display:block;
 	text-align:left;
 }
 .cart_name a{
@@ -381,11 +376,6 @@ body{
 }
 
 .cart_price{
-	font-size:x-large;
-	display:inline;
-}
-
-.cart_quantity{
 	font-size:x-large;
 	display:inline;
 }
@@ -422,14 +412,4 @@ body{
 #botao_compra:hover{
 	background-position:-100px -50px;
 	cursor: pointer;
-}
-
-/*#################################################################################
-#############		Firula			###################################
-###################################################################################*/
-
-.outGlow{
-	-webkit-box-shadow: 0px 0px 21px 13px rgba(255,255,255,0.81);
-	-moz-box-shadow: 0px 0px 21px 13px rgba(255,255,255,0.81);
-	box-shadow: 0px 0px 21px 13px rgba(255,255,255,0.81); 
 }
