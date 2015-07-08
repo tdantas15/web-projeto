@@ -292,7 +292,7 @@ body{
 
 #detail_image{
 	display:inline-block;
-	padding-left:3%;
+	margin-left:3%;
 	width:45%;
 	-webkit-border-radius: 20px;
 	-moz-border-radius: 20px;
@@ -333,7 +333,8 @@ body{
 	display:inline-block;
 	padding-left:3%;
 	width:72%;
-	overflow:hidden;
+	overflow-x:hidden;
+	overflow-y:auto;
 	
 }
 
@@ -389,7 +390,7 @@ body{
 	display:inline;
 }
 
-#remove_item_button{
+.remove_item_button{
 	font-size: 0;
 	height:50px;
 	width:50px;
@@ -401,7 +402,7 @@ body{
 	background-repeat: no-repeat;
 	background-position:0 0;
 }
-#remove_item_button:hover{
+.remove_item_button:hover{
 	background-position:0 -50px;
 	cursor: pointer;
 }

@@ -1,6 +1,6 @@
 <div id="cart_wrapper">
 	<h1>Seu Carrinho</h1>
-	<article id="cart_list">
+	<article>
 		<ul id="cart_list">
 		{{#each produtos}}
 			<li class="cart_entry">
@@ -16,7 +16,7 @@
 				</div>
 				<!-- coloquei o botão seguinte dentro de um form pra não ter que criar um js em separado pra ação do botão -->
 				<form>
-					<input id="{{id}}" id="remove_item_button" value="Remover" />
+					<input id="{{id}}" class="remove_item_button" value="Remover" />
 				</form>
 			</li>
 		{{/each}}
