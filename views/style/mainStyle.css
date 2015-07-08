@@ -117,6 +117,7 @@ body{
 /*Conteúdo a ser preenchido pelos outros layouts*/
 #content{
 	overflow-y: auto;
+	overflow-x: hidden;
 	clear:both;
 	box-sizing:border-box;
 	padding-top:180px;
@@ -336,7 +337,7 @@ body{
 }
 
 #cart_resume{
-	width:20%;
+	height:20%;
 }
 
 .cart_entry{
