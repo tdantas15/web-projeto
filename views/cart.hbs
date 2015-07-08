@@ -1,33 +1,35 @@
-<h1>Seu Carrinho</h1>
-<article id="cart_list">
-	<ul class="compact_product_list">
-	{{#each produtos}}
-		<li class="product_entry">
-			<a href="/produto/{{produto_id}}/"><img src="{{imagem}}" class="compact_image outGlow inGlow" alt="{{nome}} product image" /></a>
-			<div class="list_text_wrapper">
-				<span class="compact_name"><a href="/produto/{{produto_id}}/">{{nome}}</a></span>
-				<span class="compact_price">R&#36;{{preco}}</span>
-				<span class="compact_quantity">{{quantidade}}</span>
-				<form class="alter_qtd_form" name="alter_qtd_form" action="/cart/{{id}}?_method=PUT" method="post">
-					<input type="number" name="quantidade" min="0" max="100" placeholder="{{quantidade}}" value="{{quantidade}}"/>
-					<input type="submit" value="Alterar" />
+<div id="cart_wrapper">
+	<h1>Seu Carrinho</h1>
+	<article id="cart_list">
+		<ul id="cart_list">
+		{{#each produtos}}
+			<li class="cart_entry">
+				<a href="/produto/{{produto_id}}/"><img src="{{imagem}}" class="cart_image outGlow" alt="{{nome}} product image" /></a>
+				<div class="cart_text_wrapper">
+					<span class="cart_name"><a href="/produto/{{produto_id}}/">{{nome}}</a></span>
+					<span class="cart_price">R&#36;{{preco}}</span>
+					<span class="cart_quantity">{{quantidade}}</span>
+					<form class="alter_qtd_form" name="alter_qtd_form" action="/cart/{{id}}?_method=PUT" method="post">
+						<input type="number" name="quantidade" min="0" max="100" placeholder="{{quantidade}}" value="{{quantidade}}"/>
+						<input type="submit" value="Alterar" />
+					</form>
+				</div>
+				<!-- coloquei o botão seguinte dentro de um form pra não ter que criar um js em separado pra ação do botão -->
+				<form>
+					<input id="{{id}}" id="remove_item_button" value="Remover" />
 				</form>
-			</div>
-			<!-- coloquei o botão seguinte dentro de um form pra não ter que criar um js em separado pra ação do botão -->
-			<form>
-				<input id="{{id}}" class="remove_item_button" value="Remover" />
-			</form>
-		</li>
-	{{/each}}
-	</ul>
-</article>
-<article id="cart_resume">
-	<form action="/buy" method="POST">
-		<p id="cart_total" class="cart_total"></p>
-		<!-- associar a uma função que alerte a compra e limpe o carrinho -->
-		<button id="botao_compra" type="submit">Comprar!</button>
-	</form>
-</article>
+			</li>
+		{{/each}}
+		</ul>
+	</article>
+	<article id="cart_resume">
+		<form action="/buy" method="POST">
+			<p id="cart_total" class="cart_total"></p>
+			<!-- associar a uma função que alerte a compra e limpe o carrinho -->
+			<button id="botao_compra" type="submit">Comprar!</button>
+		</form>
+	</article>
+</div>
 <script type="text/javascript">
 	initializeRemoveFromCart();
 </script>

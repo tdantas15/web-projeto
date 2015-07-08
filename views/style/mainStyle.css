@@ -355,11 +355,17 @@ body{
 }
 
 .cart_image{
-	
+	display:inline-block;
+	width:250px;
+	height:250px;
+	-webkit-border-radius: 20px;
+	-moz-border-radius: 20px;
+	border-radius: 20px;
 }
 
 .cart_text_wrapper{
-	
+	display:inline-block;
+	position:absolute;
 }
 
 .cart_name{
@@ -383,7 +389,7 @@ body{
 	display:inline;
 }
 
-.remove_item_button{
+#remove_item_button{
 	font-size: 0;
 	height:50px;
 	width:50px;
@@ -395,7 +401,7 @@ body{
 	background-repeat: no-repeat;
 	background-position:0 0;
 }
-.remove_item_button:hover{
+#remove_item_button:hover{
 	background-position:0 -50px;
 	cursor: pointer;
 }
