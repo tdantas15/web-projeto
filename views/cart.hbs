@@ -7,8 +7,8 @@
 				<a href="/produto/{{produto_id}}/"><img src="{{imagem}}" class="cart_image outGlow" alt="{{nome}} product image" /></a>
 				<div class="cart_text_wrapper">
 					<span class="cart_name"><a href="/produto/{{produto_id}}/">{{nome}}</a></span>
-					<span class="cart_price">{{quantidade}} x R&#36;{{preco}}</span>
-					
+					<span class="cart_quantity">{{quantidade}}</span> x <span class="cart_price">R&#36;{{preco}}</span>
+
 					<form class="alter_qtd_form" name="alter_qtd_form" action="/cart/{{id}}?_method=PUT" method="post">
 						<input type="number" name="quantidade" min="0" max="100" placeholder="{{quantidade}}" value="{{quantidade}}"/>
 						<input type="submit" value="Alterar" />
